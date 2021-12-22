@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-
+from from_expression import *
 class Logic:
     
     def __init__(self,args, function):
@@ -16,9 +16,10 @@ class Logic:
         self.minterms,self.maxterms = self.makeMinTermsMaxTerms()
         
         #expression for each row
-        """self.expressions = []
+        self.Allexpress = []
         for i in range(int(2 ** self.numVars)):
-            self.expressions.append([self.board[j][i] for j in range(self.numVars)])"""
+            self.Allexpress.append([self.board[j][i] for j in range(self.numVars)])
+        print(self.Allexpress)
         self.expressions = self.computeExpressions() #a tuple of list of SOM terms and list of POM terms
     #self.board, it is a 2D list made of the columns of the truth table
     def makeBoard(self):
@@ -26,7 +27,6 @@ class Logic:
         board = []
         for p in range(k):    
             board.append([])
-        
         for i in board:
             p = 0 
             while(p != 2 ** self.numVars):
@@ -128,7 +128,26 @@ class Logic:
         print("Unreduced Boolean Expression SOM: ",self.UnreducedSUM())
         print("Product of Maxterms: ", self.maxterms)
         print("Unreduced Boolean Expression POM: ",self.unreducedMAX())
-        
+      
+    
+    
+    def MakeKarnaugh(self):
+        raise Exception("Function is not functional yet. MakeKarnaugh")
+        count = 0
+        temp = self.numVars
+        while(temp > 2):
+            count += 1
+            temp = temp // 2
+        print(count)   
+        print("""
+_____________________________________________
+|                     |                     |
+|                     |                     |
+|_____________________|_____________________|
+              
+              
+              """)
+        return
         
     def EQUAL(self, a,b):
         return a == b
