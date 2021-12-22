@@ -19,7 +19,7 @@ class Logic:
         self.expressions = []
         for i in range(int(2 ** self.numVars)):
             self.expressions.append([self.board[j][i] for j in range(self.numVars)])
-            
+        
     #self.board, it is a 2D list made of the columns of the truth table
     def makeBoard(self):
         k = self.numVars
@@ -100,6 +100,23 @@ class Logic:
                 temp = temp + " + "
         return temp + ")"
     #####################################################################################
+
+    #Computes all the true expressions in the truth table based on self.function
+    def computeExpressions(self):
+        arr = []
+        #holds both variable and notted variables
+        hold = [[i] for i in self.variables]
+        for i in range(len(hold)):
+            hold[i].append(hold[i][0] + "'")
+            hold[i].reverse()
+        
+        for i in range(len(self.function)):
+            temp = []
+            if self.function[i] == "1":
+                for j in range(len(self.board)):
+                    temp.append(hold[j][int(self.board[j][i])])
+                arr.append(temp)    
+        return arr
 
     def printTruthTable(self):
         for i in range(self.numVars + 1):
