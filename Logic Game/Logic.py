@@ -16,10 +16,10 @@ class Logic:
         self.minterms,self.maxterms = self.makeMinTermsMaxTerms()
         
         #expression for each row
-        self.expressions = []
+        """self.expressions = []
         for i in range(int(2 ** self.numVars)):
-            self.expressions.append([self.board[j][i] for j in range(self.numVars)])
-        
+            self.expressions.append([self.board[j][i] for j in range(self.numVars)])"""
+        self.expressions = self.computeExpressions() #a tuple of list of SOM terms and list of POM terms
     #self.board, it is a 2D list made of the columns of the truth table
     def makeBoard(self):
         k = self.numVars
@@ -56,54 +56,47 @@ class Logic:
         
         return trans
     
-    #These functions compute the unreduced Sum of Minterms of self.function
+    #This function returns the unreduced Sum of Minterms of self.function in a nice format
     #####################################################################################
     def UnreducedSUM(self):
         unreduced = ""
-        for i in range(int(2 ** self.numVars)):
-            if(self.function[i] == "1"):
-                unreduced = unreduced + self.unreducedHelperSUM(self.expressions[i])
-        unreduced = unreduced.rsplit(" + ", 1)[0]
-        
+        formatTrack =0
+        for i in self.expressions[0]:
+            for j in i: 
+                unreduced = unreduced + j
+            formatTrack +=1
+            if formatTrack == len(self.expressions[0]):
+                continue
+            else:
+                unreduced += "+"
+            
         return unreduced
     
-    def unreducedHelperSUM(self,expr):
-        temp = ""
-        for i in range(len(expr)):
-            if(expr[i] == "0"):
-                temp = temp  + self.variables[i] +"'"
-            else:
-                temp = temp + self.variables[i]
-                
-        return temp + " + "
     #####################################################################################
     
-    #These functions compute the unreduced Product of Maxterms of self.function
+    #This function returns the unreduced Product of Maxterms of self.function in a nice format
     #####################################################################################
     def unreducedMAX(self):
         unreduced = ""
-        for i in range(int(2 ** self.numVars)):
-            if(self.function[i] == "0"):
-                unreduced = unreduced + self.unreducedHelperMAX(self.expressions[i])
+        
+        for i in self.expressions[1]:
+            formatTrack =0
+            unreduced += "("
+            for j in i: 
+                formatTrack +=1
+                if(formatTrack == self.numVars):    
+                    unreduced = unreduced + j 
+                else:
+                    unreduced = unreduced + j +"+"
+            unreduced += ")"
         return unreduced
     
-    def unreducedHelperMAX(self,expr):
-        temp = "("
-        for i in range(len(expr)):
-            if(expr[i] == "0"):
-                temp = temp  + self.variables[i] +"'"
-            else:
-                temp = temp + self.variables[i]
-            if(i + 1 == len(expr)):
-                continue
-            else:
-                temp = temp + " + "
-        return temp + ")"
     #####################################################################################
 
     #Computes all the true expressions in the truth table based on self.function
     def computeExpressions(self):
-        arr = []
+        arrSOM = []
+        arrPOM = []
         #holds both variable and notted variables
         hold = [[i] for i in self.variables]
         for i in range(len(hold)):
@@ -115,8 +108,12 @@ class Logic:
             if self.function[i] == "1":
                 for j in range(len(self.board)):
                     temp.append(hold[j][int(self.board[j][i])])
-                arr.append(temp)    
-        return arr
+                arrSOM.append(temp)
+            else:
+                for j in range(len(self.board)):
+                    temp.append(hold[j][int(self.board[j][i])])
+                arrPOM.append(temp)
+        return arrSOM,arrPOM
 
     def printTruthTable(self):
         for i in range(self.numVars + 1):
