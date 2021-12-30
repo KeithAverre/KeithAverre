@@ -20,15 +20,18 @@ def startComputing(startString):
         
 def formatCheck(workStr):
     raise Exception("Function is not functional yet. From format Checking")
+    err = "Interpreted as: {}\n".format("".join(i for i in workStr))
     try:
         symCheck = ["+","'","(",")"," "] #allowed symbols
         adjustToList = []
         for idx,i in enumerate(workStr):
             if(i < "a" or i > "z"): #checks if is letter
-                if(not inList(i,symCheck)): #checks if is accepted symbol   
-                    raise Exception("Interpreted as: {}\nInvalid Symbol within input \"{}\" at index {}.".format("".join(i for i in workStr),i,str(idx)))
+                if(not inList(i,symCheck)): #checks if is accepted symbol 
+                    err += "Invalid Symbol within input \"{}\" at index {}.".format(i,str(idx))
+                    raise Exception(err)
                 if(i == ")"):
-                    raise Exception("Interpreted as: {}\nInvalid Symbol position within input \"{}\" at index {}.".format("".join(i for i in workStr),i,str(idx)))
+                    err += "Invalid Symbol position within input \"{}\" at index {}.".format(i,str(idx))
+                    raise Exception(err)
     except Exception as e:
         print(e)
         return False
