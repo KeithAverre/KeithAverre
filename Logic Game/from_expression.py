@@ -11,7 +11,7 @@ This file is to hold all expression handling to avoid clutter within other files
 """
 
 def startComputing(startString):
-    #raise Exception("Function is not functional yet. From expression")
+    raise Exception("Function is not functional yet. From expression")
     adjustString = startString.lower() #convert to lowercase
     adjustString = list(map(str,adjustString))
     print(adjustString)
@@ -19,7 +19,7 @@ def startComputing(startString):
     
         
 def formatCheck(workStr):
-    #raise Exception("Function is not functional yet. From format Checking")
+    raise Exception("Function is not functional yet. From format Checking")
     try:
         symCheck = ["+","'","(",")"," "] #allowed symbols
         adjustToList = []
