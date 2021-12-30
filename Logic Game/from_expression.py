@@ -11,21 +11,24 @@ This file is to hold all expression handling to avoid clutter within other files
 """
 
 def startComputing(startString):
-    raise Exception("Function is not functional yet. From expression")
+    #raise Exception("Function is not functional yet. From expression")
     adjustString = startString.lower() #convert to lowercase
+    adjustString = list(map(str,adjustString))
+    print(adjustString)
     formatCheck(adjustString)
     
         
 def formatCheck(workStr):
-    raise Exception("Function is not functional yet. From format Checking")
+    #raise Exception("Function is not functional yet. From format Checking")
     try:
-        symCheck = ["+","'","(",")"] #allowed symbols
+        symCheck = ["+","'","(",")"," "] #allowed symbols
         adjustToList = []
-        for i in workStr:
+        for idx,i in enumerate(workStr):
             if(i < "a" or i > "z"): #checks if is letter
                 if(not inList(i,symCheck)): #checks if is accepted symbol   
-                    raise Exception("Invalid Symbol within input {}".format(i))
-        
+                    raise Exception("Interpreted as: {}\nInvalid Symbol within input \"{}\" at index {}.".format("".join(i for i in workStr),i,str(idx)))
+                if(i == ")"):
+                    raise Exception("Interpreted as: {}\nInvalid Symbol position within input \"{}\" at index {}.".format("".join(i for i in workStr),i,str(idx)))
     except Exception as e:
         print(e)
         return False

@@ -9,6 +9,8 @@ def main():
     endState = False
     while(not endState):
         UserInput = input("Input some Function wanted to be implemented (must be a power of 2): (ex: 0 0 0 1)\n")
+        #startComputing(UserInput)
+        #return
         UserInput = UserInput.split()
         
         #Check if out of bounds call
