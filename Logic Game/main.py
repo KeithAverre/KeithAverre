@@ -1,7 +1,9 @@
 # -*- coding: utf-8 -*-
 from Logic import Logic
+from from_expression import *
 import math
 def main():
+    
     # USER INPUT SECTION
     #######################################
     endState = False
