@@ -19,7 +19,7 @@ class Logic:
         self.Allexpress = []
         for i in range(int(2 ** self.numVars)):
             self.Allexpress.append([self.board[j][i] for j in range(self.numVars)])
-        print(self.Allexpress)
+        
         self.expressions = self.computeExpressions() #a tuple of list of SOM terms and list of POM terms
     #self.board, it is a 2D list made of the columns of the truth table
     def makeBoard(self):

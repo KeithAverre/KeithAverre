@@ -10,6 +10,20 @@ This file is to hold all expression handling to avoid clutter within other files
 
 """
 
-def startComputing():
+def startComputing(startString):
     raise Exception("Function is not functional yet. From expression")
-
+    adjustString = startString.lower() #convert to lowercase
+    symCheck = ["+","'","(",")"] #allowed symbols
+    adjustToList = []
+    for i in adjustString:
+        if(not inList(i,symCheck)):
+            raise Exception("Invalid Symbol within input {}".format(i))
+        
+def formatCheck(startString):
+    raise Exception("Function is not functional yet. From format Checking")
+        
+def inList(item, arr):
+    for i in arr:
+        if i == item:
+            return True
+    return False
