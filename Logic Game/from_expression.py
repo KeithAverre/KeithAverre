@@ -21,23 +21,38 @@ def startComputing(startString):
 def formatCheck(workStr):
     raise Exception("Function is not functional yet. From format Checking")
     err = "Interpreted as: {}\n".format("".join(i for i in workStr))
+    originalStr = workStr
+    uniqueChars = []
     try:
-        symCheck = ["+","'","(",")"," "] #allowed symbols
+        symCheck = ["+","'","(",")"," ","{","}"] #allowed symbols
         adjustToList = []
         for idx,i in enumerate(workStr):
             if(i < "a" or i > "z"): #checks if is letter
-                if(not inList(i,symCheck)): #checks if is accepted symbol 
+                if(not inList(i,symCheck)[0]): #checks if is accepted symbol 
                     err += "Invalid Symbol within input \"{}\" at index {}.".format(i,str(idx))
                     raise Exception(err)
+                if(i == "("): # Makes sure there is a pair of parenthesis
+                    tempCheck = inList(")",workStr[idx:len(workStr)])
+                    if(not tempCheck[0]):
+                        err += "Invalid Symbol position within input \"{}\" at index {}.".format(i,str(idx))
+                        raise Exception(err)
+                    else:
+                        workStr[tempCheck[1]+idx] = "}" # this represents a pair of parenthesis
                 if(i == ")"):
                     err += "Invalid Symbol position within input \"{}\" at index {}.".format(i,str(idx))
                     raise Exception(err)
+            else: # is a letter
+                if(not inList(i, uniqueChars)[0]): #Checks if letter is unique
+                    uniqueChars.append(i)
     except Exception as e:
         print(e)
         return False
+    uniqueChars.sort()
+    print(uniqueChars)
     return True
 def inList(item, arr):
-    for i in arr:
+    for idx,i in enumerate(arr):
         if i == item:
-            return True
-    return False
+            return True,idx
+    return False,-1
+

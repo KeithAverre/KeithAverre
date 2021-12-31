@@ -7,10 +7,15 @@ def main():
     # USER INPUT SECTION
     #######################################
     endState = False
+    UserInput = -100
+    while(UserInput != 1 and UserInput != 2):
+        UserInput = int(input("Pick one of the following options:\n1)String input (ex: xyz + x')\n2)Binary input (ex: 0 0 0 1)\n"))
+    
+    if(UserInput == 1):
+        ExpressionInput()
+        return
     while(not endState):
         UserInput = input("Input some Function wanted to be implemented (must be a power of 2): (ex: 0 0 0 1)\n")
-        #startComputing(UserInput)
-        #return
         UserInput = UserInput.split()
         
         #Check if out of bounds call
@@ -30,7 +35,7 @@ def main():
             print("Too Few arguments")
             continue
         
-        #check if only each split is either "1" or "0" and length of 1
+        #check if only each split is either 1"1" or "0" and length of 1
         temp = False
         for i in range(len(UserInput)):
             if(UserInput[i] == "0"):
@@ -60,9 +65,9 @@ def ExpressionInput():
         #UserInput = input("Input some Function wanted to be implemented (in terms of single character variables): (ex: xy + z')\n")
         
     #used for testing purposes, to be deleted
-    UserInput = "x + y'z"
-    UserInput.lower()
-    UserInput = UserInput.split()
+    UserInput = input("Input some Function wanted to be implemented (Must contain a space between each term and operation)\n")
+    startComputing(UserInput)
+    return
     
 if(__name__ == "__main__"):
     main()
