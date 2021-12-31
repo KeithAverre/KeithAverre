@@ -1,18 +1,44 @@
 # -*- coding: utf-8 -*-
 from from_expression import *
 class Logic:
-    
-    def __init__(self,args, function):
+    """
+    "" INPUTS:
+    "" args = list of chars to represent the variable names   
+    "" function = List of binary numbers of power of 2 length 
+    ""      OR
+    ""          An expression to be decoded into a list of binary numbers
+    ""          stored as a list
+    ""
+    ""
+    "" VARIABLES:
+    "" self.variable = list of chars as variable names
+    "" self.numVars = number of variables - function variable F
+    "" self.board = 2d list of string 1 and 0s to represent the truth table
+    "" self.varList = self.variables + "F"
+    "" self.function = the implementation function that this Logic expression
+    ""      is expressing
+    "" self.minterms = list of indexes where F = 1
+    "" self.maxterms = list of indexes where F = 0
+    "" self.Allexpress = List of all row values where F = 1
+    "" self.expressions = a tuple of 2 strings, 1) unreduced representation of
+    ""      SOM terms in variable form, 2) unreduced representation of POM in
+    ""      variable form
+    """
+    def __init__(self,args, function = None):
         if(len(args) <= 0):
             raise Exception("Too few arguements")
+        if(function == None):
+            raise Exception("Need function to be implemented")
         self.variables = args
         self.numVars = len(self.variables)
         self.board = self.makeBoard()
         
         self.varList = [i for i in self.variables]
         self.varList.append("F")
-        
-        self.function = function
+        if(not inList("0",function)[0]):
+            pass
+        else:
+            self.function = function
         self.minterms,self.maxterms = self.makeMinTermsMaxTerms()
         
         #expression for each row
@@ -49,13 +75,6 @@ class Logic:
                 Maxterms.append(i) 
         return Minterms,Maxterms
     
-    def makeTranslation(self):
-        trans = []
-        for i in self.variables:
-            trans.append([])
-        
-        return trans
-    
     #This function returns the unreduced Sum of Minterms of self.function in a nice format
     #####################################################################################
     def UnreducedSUM(self):
@@ -68,7 +87,7 @@ class Logic:
             if formatTrack == len(self.expressions[0]):
                 continue
             else:
-                unreduced += "+"
+                unreduced += " + "
             
         return unreduced
     
@@ -87,7 +106,7 @@ class Logic:
                 if(formatTrack == self.numVars):    
                     unreduced = unreduced + j 
                 else:
-                    unreduced = unreduced + j +"+"
+                    unreduced = unreduced + j +" + "
             unreduced += ")"
         return unreduced
     
@@ -172,7 +191,17 @@ _____________________________________________
     
     def XNOT(self, a,b):
         return self.NOT(self.XOR(a,b))
-    
+   
+    #helper function to find an item in an unsorted list.
+    # input: Item to be looked for.
+    #        Arr to look for item in.
+    # output: a tuple of a boolean if found and index where it was found or -1 
+    #           if not found.
+def inList(item, arr):
+    for idx,i in enumerate(arr):
+        if i == item:
+            return True,idx
+    return False,-1
     
     
     

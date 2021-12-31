@@ -19,7 +19,7 @@ def startComputing(startString):
     
         
 def formatCheck(workStr):
-    raise Exception("Function is not functional yet. From format Checking")
+    #raise Exception("Function is not functional yet. From format Checking")
     err = "Interpreted as: {}\n".format("".join(i for i in workStr))
     originalStr = workStr
     uniqueChars = []
@@ -50,6 +50,8 @@ def formatCheck(workStr):
     uniqueChars.sort()
     print(uniqueChars)
     return True
+
+
 def inList(item, arr):
     for idx,i in enumerate(arr):
         if i == item:
