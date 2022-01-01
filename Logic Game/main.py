@@ -59,7 +59,7 @@ def main():
     y.printTruthTable()
     
 def ExpressionInput():
-    #raise Exception("Function is not Functional Yet. expression input")
+    raise Exception("Function is not Functional Yet. expression input")
     #endState = False
     #while(not endState):
         #UserInput = input("Input some Function wanted to be implemented (in terms of single character variables): (ex: xy + z')\n")

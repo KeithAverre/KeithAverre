@@ -4,8 +4,8 @@
 This file is to hold all expression handling to avoid clutter within other files where it would be out of place.
 
 -Format checking; complete parenthesis, no unusual characters, 
--logic checking and reducing
 -Keep track of all unique alphabet characters
+-logic checking and reducing
 -Give to logic.py to compute a Logic object.
 
 """
@@ -21,7 +21,7 @@ def startComputing(startString):
 def formatCheck(workStr):
     #raise Exception("Function is not functional yet. From format Checking")
     err = "Interpreted as: {}\n".format("".join(i for i in workStr))
-    originalStr = workStr
+    originalStr = workStr # save the original String
     uniqueChars = []
     try:
         symCheck = ["+","'","(",")"," ","{","}"] #allowed symbols
@@ -41,7 +41,7 @@ def formatCheck(workStr):
                 if(i == ")"):
                     err += "Invalid Symbol position within input \"{}\" at index {}.".format(i,str(idx))
                     raise Exception(err)
-            else: # is a letter
+            else: # is a letter 
                 if(not inList(i, uniqueChars)[0]): #Checks if letter is unique
                     uniqueChars.append(i)
     except Exception as e:

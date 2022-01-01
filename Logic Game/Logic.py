@@ -9,7 +9,6 @@ class Logic:
     ""          An expression to be decoded into a list of binary numbers
     ""          stored as a list
     ""
-    ""
     "" VARIABLES:
     "" self.variable = list of chars as variable names
     "" self.numVars = number of variables - function variable F
@@ -35,7 +34,7 @@ class Logic:
         
         self.varList = [i for i in self.variables]
         self.varList.append("F")
-        if(not inList("0",function)[0]):
+        if(not inList("0",function)[0] and not inList("1",function)[0]):
             pass
         else:
             self.function = function
